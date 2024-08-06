@@ -1,0 +1,50 @@
+name: Chocolatine
+on:
+    [push, pull_request]
+env:
+    MIRROR_URL: "git@github.com:JescAude/B-DOP-200-COT-2-2-private_chocolatine-jescAude.git"
+    EXECUTABLES: "108trigo"
+jobs:
+    check_coding_style:
+        name: check_coding_style 
+        runs-on: ubuntu-latest
+        container: ghcr.io/epitech/coding-style-checker:latest
+        steps:
+            - uses: actions/checkout@v4
+            - run: |
+                check.sh $(pwd) $(pwd)
+                if [ -f $coding-style-reports.log ]; then 
+                    cat coding-style-reports.log;
+                else
+                    echo "No file"
+                fi
+    check_program_compilation:
+        name: check_program_compilation
+        needs: check_coding_style
+        runs-on: ubuntu-latest
+        container: epitechcontent/epitest-docker
+        steps:
+            - uses: actions/checkout@v4
+            - run: |
+                make 
+                make clean
+    run_tests:
+        name: run_tests
+        needs: check_program_compilation
+        runs-on: ubuntu-latest
+        container: epitechcontent/epitest-docker
+        steps:
+            - uses: actions/checkout@v4
+            - run: make fclean
+    push_to_mirror:
+        name: push_to_mirror
+        needs: run_tests
+        runs-on: ubuntu-latest
+        if: ${{ github.event_name }} == "push" 
+        steps:
+          - name: tyy
+            uses: actions/checkout@v4
+          - uses: pixta-dev/repository-mirroring-action@v1
+            with:
+              target_repo_url: ${{ env.MIRROR_URL }}
+              ssh_private_key: ${{ secrets.GIT_SSH_PRIVATE_KEY }}
