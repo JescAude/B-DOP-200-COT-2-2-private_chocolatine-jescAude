@@ -9,8 +9,10 @@ jobs:
         runs-on: ubuntu-latest
         container: ghcr.io/epitech/coding-style-checker:latest
         steps:
-            - uses: actions/checkout@v4
-            - run: |
+          - name: checkout-repository
+            uses: actions/checkout@v4
+          - name: run-coding-style-and-check-if-file-is-created
+            run: |
                 check.sh $(pwd) $(pwd)
                 if [ -f $coding-style-reports.log ]; then 
                     cat coding-style-reports.log;
@@ -29,8 +31,8 @@ jobs:
               run: make
               timeout-minutes: 2
             - name: check-if-binary-exists-and-is-executable
-              run:
-                if [[ -s $EXECUTABLES] && ][[-x $EXECUTABLES]]; then
+              run: |
+                if [[ -s $EXECUTABLES ]] && [[ -x $EXECUTABLES ]] then
                     echo "Yes binary exists and it's executable"
                 else
                     echo "Binary doesn't exist or exists and isn't executable"
