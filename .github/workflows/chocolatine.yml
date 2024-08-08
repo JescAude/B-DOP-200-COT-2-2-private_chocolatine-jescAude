@@ -25,10 +25,17 @@ jobs:
         steps:
             - name: checkout-repository
               uses: actions/checkout@v4
-            - name: compilation-and-cleaning
-              run: |
-                make
-                make clean
+            - name: compile-program
+              run: make
+            - name: check-if-binary-exists-and-is-executable
+              run:
+                if [ -s ${{ env.EXECUTABLES }}] && [-x ${{ env.EXECUTABLES }}]; then
+                    echo "Yes binary exists and it's executable"
+                else
+                    echo "Binary doesn't exist or exists and isn't executable"
+                fi
+            - name: cleaning-repository
+              run: make clean
     run_tests:
         name: run_tests
         needs: check_program_compilation
