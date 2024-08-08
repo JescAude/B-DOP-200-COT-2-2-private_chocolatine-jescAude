@@ -1,28 +1,39 @@
 ##
 ## EPITECH PROJECT, 2024
-## B-MAT-200-COT-2-2-bs108trigo-jessica.moussougan
+## makefile
 ## File description:
-## Makefile
+## make
 ##
 
-SRC		=       src/*.c
+SRC1    =       src/*.c
 
-BIN     =       108trigo
+SRC2    =       src/velocity.c\
+                src/coordinates.c\
+                src/incidence_angle.c\
+
+TEST    =       tests/test_my_101_pong_game.c
+
+BIN1    =       101pong
+
+BIN2    =       unit_tests
 
 all:
-	gcc -lm $(SRC) -o $(BIN) -g3
+	gcc -lm $(SRC1) -o $(BIN1)
+
+test_units:
+	gcc -lm $(SRC2) -o $(BIN2) $(TEST) --coverage -lcriterion
+
+tests_run:	test_units
+		./$(BIN2)
 
 clean:
 	rm -rf *~
 	rm -rf *#
+	rm -rf *.gcda
+	rm -rf *.gcno
 
 fclean: clean
-		rm -rf $(BIN)
+	rm -rf $(BIN1)
+	rm -rf $(BIN2)
 
 re:	fclean all
-
-style:
-		clear
-		coding-style . .
-		cat coding-style-reports.log
-		rm -rf coding-style-reports.log

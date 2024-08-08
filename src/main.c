@@ -1,64 +1,55 @@
 /*
 ** EPITECH PROJECT, 2024
-** B-MAT-200-COT-2-2-bs108trigo-jessica.moussougan
+** main_function
 ** File description:
-** main
+** a main function to test 101_pong_project
 */
 
-#include "../include/trigo.h"
+#include "../include/my.h"
 
 int main(int ac, char **av)
 {
-    double **tab = NULL;
-    double **res = NULL;
+    int n = 0;
+    int i = 0;
+    vector t1;
+    vector t2;
+    char c = '\n';
 
-    if ((ac - 2) - (pow(sqrt(ac - 2), 2)) != 0)
+    if (ac == 2 && strcmp(av[1], "-h") == 0) {
+        printf("USAGE\n");
+        printf("   ./101pong x0 y0 z0 x1 y1 z1 n\n");
+        printf("%c", c);
+        printf("DESCRIPTION\n");
+        printf("    x0  ball abscissa at time t - 1\n");
+        printf("    y0  ball ordinate at time t - 1\n");
+        printf("    z0  ball altitude at time t - 1\n");
+        printf("    x1  ball abscissa at time t\n");
+        printf("    y1  ball ordinate at time t\n");
+        printf("    z1  ball altitude at time t\n");
+        printf("    n   time shift (greater than or");
+        printf(" equal to zero, integer)\n");
+    }
+    if (ac == 2 && (strcmp(av[1], "-h") > 0 || strcmp(av[1], "-h") < 0)) {
         return (84);
-    if (ac <= 1 || ac == 2)
+    }
+    if (ac != 8 && ac != 2) {
         return (84);
-    if (ac - 2 == 0)
+    }
+    if (ac == 8) {
+        t1.x = atof(av[1]);
+        t1.y = atof(av[2]);
+        t1.z = atof(av[3]);
+        t2.x = atof(av[4]);
+        t2.y = atof(av[5]);
+        t2.z = atof(av[6]);
+        n = atoi(av[7]);
+        if (n >= 0 && (atof(av[7]) == n)) {
+            coordinates_after_time(t1, t2, n);
+            angle_incidence(t1, t2);
+        } else {
+            return (84);
+        }
+    } else {
         return (84);
-    if (check_first_parameter(av[1]) == false || check_coefficents(av) == false)
-        return (84);
-    if (strcmp(av[1], "EXP") == 0) {
-        ac = sqrt(ac - 2);
-        tab = coeff_to_array(av, ac);
-        res = compute_exp(tab, ac, 49);
-        print_matrix(res, ac);
-        free_tab(tab, ac);
-        free_tab(res, ac);
     }
-    if (strcmp(av[1], "SIN") == 0) {
-        ac = sqrt(ac - 2);
-        tab = coeff_to_array(av, ac);
-        res = compute_sin(tab, ac, 49);
-        print_matrix(res, ac);
-        free_tab(tab, ac);
-        free_tab(res, ac);
-    }
-    if (strcmp(av[1], "COS") == 0) {
-        ac = sqrt(ac - 2);
-        tab = coeff_to_array(av, ac);
-        res = compute_cos(tab, ac, 49);
-        print_matrix(res, ac);
-        free_tab(tab, ac);
-        free_tab(res, ac);
-    }
-    if (strcmp(av[1], "SINH") == 0) {
-        ac = sqrt(ac - 2);
-        tab = coeff_to_array(av, ac);
-        res = compute_sinh(tab, ac, 49);
-        print_matrix(res, ac);
-        free_tab(tab, ac);
-        free_tab(res, ac);
-    }
-    if (strcmp(av[1], "COSH") == 0) {
-        ac = (sqrt(ac - 2));
-        tab = coeff_to_array(av, ac);
-        res = compute_cosh(tab, ac, 49);
-        print_matrix(res, ac);
-        free_tab(tab, ac);
-        free_tab(res, ac);
-    }
-    return (0);
 }
