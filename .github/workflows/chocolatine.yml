@@ -1,5 +1,7 @@
 name: Chocolatine
 on: [push, pull_request]
+    #branches-ignore:
+    # - 'ga-
 env:
     MIRROR_URL: "git@github.com:EpitechPromo2028/B-DOP-200-COT-2-2-chocolatine-jessica.moussougan.git"
     EXECUTABLES: "101pong"
@@ -14,6 +16,7 @@ jobs:
           - name: run-coding-style-and-check-if-file-is-created
             run: |
                 check.sh $(pwd) $(pwd)
+                ls
                 if [ -f $coding-style-reports.log ]; then 
                     cat coding-style-reports.log;
                 else
@@ -33,9 +36,9 @@ jobs:
             - name: check-if-binary-exists-and-is-executable
               run: |
                 if [[ -s $EXECUTABLES ]] && [[ -x $EXECUTABLES ]] then
-                    echo "Yes binary exists and it's executable"
+                    echo "Yes binary exists and it's executable" && exit 0
                 else
-                    echo "Binary doesn't exist or exists and isn't executable"
+                    echo "Binary doesn't exist or exists and isn't executable" && exit 1
                 fi
             - name: cleaning-repository
               run: make clean
