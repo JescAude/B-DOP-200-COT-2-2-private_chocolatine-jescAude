@@ -1,7 +1,11 @@
 name: Chocolatine
-on: [push, pull_request]
-    #branches-ignore:
-    # - 'ga-
+on: 
+  push:
+    branches-ignore:
+      - 'ga-ignore-*'
+  pull_request:
+      branches-ignore:
+      - 'ga-ignore-*'
 env:
     MIRROR_URL: "git@github.com:EpitechPromo2028/B-DOP-200-COT-2-2-chocolatine-jessica.moussougan.git"
     EXECUTABLES: "101pong"
@@ -16,11 +20,10 @@ jobs:
           - name: run-coding-style-and-check-if-file-is-created
             run: |
                 check.sh $(pwd) $(pwd)
-                ls
-                if [ -f $coding-style-reports.log ]; then 
-                    cat coding-style-reports.log;
+                if [ -s coding-style-reports.log ]; then 
+                    cat coding-style-reports.log && exit 1
                 else
-                    echo "No file"
+                    echo "No file" && exit 0
                 fi
     check_program_compilation:
         name: check_program_compilation
