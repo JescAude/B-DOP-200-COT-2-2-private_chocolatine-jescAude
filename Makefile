@@ -3,13 +3,11 @@
 ## makefile
 ## File description:
 ## make
-##https://files.catbox.moe/jtvpsk.webm // site_ecommerce_vendeur
-## https://files.catbox.moe/upegua.webm// site_ecommerce_acheteur
-## https://files.catbox.moe/5aza6x.webm // système_de_pointage_manager
-## https://files.catbox.moe/fkgvbo.webm // système_de_pointage_employé
-
+# https://drive.google.com/file/d/1bWZnJtpXtPvIi17DPOkiplPl42cP705-/view?usp=sharing // système_de_pointage_manager
+# https://drive.google.com/file/d/1TW6-8MamggNpg65lzd94hChk_dPVOqm7/view?usp=sharing // système_de_pointage_employé
+# https://drive.google.com/file/d/1tA_onzAbyIz4j5c6-456DqE2k6RZYbik/view?usp=sharing // site_ecommerce_vendeur
+# https://drive.google.com/file/d/1CazeVYnOtKvKPX3mMnCC2oNZYOIPx5OX/view?usp=sharing // site_ecommerce_acheteur
 SRC1    =       src/*.c
-
 SRC2    =       src/velocity.c\
                 src/coordinates.c\
                 src/incidence_angle.c\
